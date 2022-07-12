@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
-    List<Restaurant> findAll();
-
-    Restaurant save(Restaurant restaurant);
+public interface MenuRepository extends JpaRepository<Menu, Long> {
+    @Query("SELECT m FROM Menu m ORDER BY m.id DESC")
+    List<Menu> findAll();
 }
+

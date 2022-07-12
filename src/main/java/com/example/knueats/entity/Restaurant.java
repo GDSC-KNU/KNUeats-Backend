@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Restaurant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
