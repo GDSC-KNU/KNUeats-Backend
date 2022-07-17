@@ -20,7 +20,7 @@ public class Restaurant {
    // private String description;
 
     private String tel;
-    //private String address;
+    private String address;
 
     private float lat;
 

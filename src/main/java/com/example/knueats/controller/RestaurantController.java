@@ -4,6 +4,7 @@ import com.example.knueats.entity.Menu;
 import com.example.knueats.entity.MenuRepository;
 import com.example.knueats.entity.Restaurant;
 import com.example.knueats.entity.RestaurantRepository;
+import com.example.knueats.service.GeoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,13 @@ public class RestaurantController {
     RestaurantRepository restaurantRepository;
     @Autowired
     MenuRepository menuRepository;
+    @Autowired
+    GeoService geoService;
     @PostMapping("/")
     public Restaurant create(@RequestBody Restaurant restaurant){
+        String addr = restaurant.getAddress();
+        String json = geoService.getKakaoApiFromAddress(addr);
+        restaurant.setAddress(json);
         return restaurantRepository.save(restaurant);
     }
 
