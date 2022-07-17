@@ -1,5 +1,9 @@
 package com.example.knueats.service;
 
+import aj.org.objectweb.asm.TypeReference;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -10,6 +14,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service("geoService")
 public class GeoService {
@@ -49,5 +56,7 @@ public class GeoService {
         }
         return jsonString;
     }
-
+//    public Float getLatitude(String jsonString){
+//
+//    }
 }

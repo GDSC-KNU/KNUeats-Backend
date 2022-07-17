@@ -31,13 +31,14 @@ public class Restaurant {
     ; // tag enum
 
     @Builder
-    public Restaurant(String name, String tel, String menu, float lat, float lon, String category) {
+    public Restaurant(String name, String tel, String menu, float lat, float lon, String category,String address) {
         this.name = name;
         this.tel = tel;
         this.menu = menu;
         this.lat = lat;
         this.lon = lon;
         this.category = category;
+        this.address = address;
     }
 
 

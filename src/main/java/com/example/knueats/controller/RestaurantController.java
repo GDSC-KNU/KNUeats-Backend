@@ -36,7 +36,6 @@ public class RestaurantController {
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         return restaurantList;
     }
-
     @GetMapping("/{category}")
     public List<Restaurant> list(@PathVariable String category){
         List<Restaurant> restaurantList = restaurantRepository.findAll();
@@ -51,6 +50,9 @@ public class RestaurantController {
     @GetMapping("/{category}/{id}")
     public  Restaurant detail(@PathVariable Long id){
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        String addr = restaurant.getAddress();
+        String json = geoService.getKakaoApiFromAddress(addr);
+        restaurant.setCategory(json);
         return restaurant;
     }
     @GetMapping("/search")
