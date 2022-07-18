@@ -5,6 +5,8 @@ import com.example.knueats.entity.MenuRepository;
 import com.example.knueats.entity.Restaurant;
 import com.example.knueats.entity.RestaurantRepository;
 import com.example.knueats.service.GeoService;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +26,12 @@ public class RestaurantController {
     @Autowired
     GeoService geoService;
     @PostMapping("/")
-    public Restaurant create(@RequestBody Restaurant restaurant){
+    public Restaurant create(@RequestBody Restaurant restaurant) throws ParseException {
         String addr = restaurant.getAddress();
         String json = geoService.getKakaoApiFromAddress(addr);
-        restaurant.setAddress(json);
+        ArrayList<Float> pos = geoService.changeToJSON(json);
+        restaurant.setLon(pos.get(0));
+        restaurant.setLat(pos.get(1));
         return restaurantRepository.save(restaurant);
     }
 
@@ -46,14 +50,6 @@ public class RestaurantController {
             }
         }
         return returnList;
-    }
-    @GetMapping("/{category}/{id}")
-    public  Restaurant detail(@PathVariable Long id){
-        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
-        String addr = restaurant.getAddress();
-        String json = geoService.getKakaoApiFromAddress(addr);
-        restaurant.setCategory(json);
-        return restaurant;
     }
     @GetMapping("/search")
     public List<Restaurant> search(@RequestParam(value="word") String word){
