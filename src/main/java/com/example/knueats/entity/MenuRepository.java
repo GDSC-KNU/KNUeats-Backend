@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MenuRepository extends JpaRepository<Menu, Long> {
-    @Query("SELECT m FROM Menu m ORDER BY m.id DESC")
+    @Query("SELECT m FROM Menu m ORDER BY m.id DESC") // SELECT * from sys.menu where name like '%input%'
     List<Menu> findAll();
 }
 
