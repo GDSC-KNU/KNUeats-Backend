@@ -34,13 +34,12 @@ public class RestaurantController {
         restaurant.setLat(pos.get(1));
         return restaurantRepository.save(restaurant);
     }
-
-    @GetMapping("/")
-    public List<Restaurant> allList(){
-        List<Restaurant> restaurantList = restaurantRepository.findAll();
-        return restaurantList;
+    @GetMapping("/{id}")
+    public Restaurant detail(@PathVariable Long id){
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        return restaurant;
     }
-    @GetMapping("/{category}")
+    @GetMapping("/category/{category}")
     public List<Restaurant> list(@PathVariable String category){
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         List<Restaurant> returnList = new ArrayList<>();
@@ -51,7 +50,7 @@ public class RestaurantController {
         }
         return returnList;
     }
-    @GetMapping("/search")
+    @GetMapping("/search/")
     public List<Restaurant> search(@RequestParam(value="word") String word){
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         List<com.example.knueats.entity.Menu> menuList = menuRepository.findAll();
@@ -60,15 +59,25 @@ public class RestaurantController {
             if(word.equals(restaurant.getName())) //검색 이름, 메뉴겹치면 반환
                 returnList.add(restaurant);
         }
+        System.out.println(returnList);
         for(Menu menu: menuList){
             if(word.equals(menu.getName())) {
                 //해당 메뉴를 가진 레스토랑이 있다면 반환
                 Restaurant restaurant = restaurantRepository.findById(menu.getRestaurantId()).orElse(null);
+                returnList.add(restaurant);
             }
         }
         return returnList;
     }
-    //@GetMapping("/location/{location}")
-
-
+    @GetMapping("/location/{location}")
+    public List<Restaurant> locationList(@PathVariable String location){
+        List<Restaurant> restaurantList = restaurantRepository.findAll();
+        List<Restaurant> returnList = new ArrayList<>();
+        for(Restaurant restaurant : restaurantList){
+            if(location.equals(restaurant.getLocation())){
+                returnList.add(restaurant);
+            }
+        }
+        return returnList;
+    }
 }
