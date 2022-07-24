@@ -11,6 +11,7 @@ import org.json.simple.JSONAware;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.stereotype.Service;
@@ -30,13 +31,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service("geoService")
-//@PropertySources({
-//        @PropertySource("classpath:properties/env.properties")
-//})
 public class GeoService {
+    @Value("${KAKAO_API_KEY}")
+    String apiKey;
+    @Value("${KAKAO_URL}")
+    String apiUrl;
     public String getKakaoApiFromAddress(String roadFullAddr) {
-        String apiKey = "20a781e1d7a2357890100797f1525c1b";
-        String apiUrl = "https://dapi.kakao.com/v2/local/search/address.json";
         String jsonString = null;
 
         try {

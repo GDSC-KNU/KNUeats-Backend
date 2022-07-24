@@ -17,6 +17,10 @@ public class RestaurantInfo {
     private String category;
     private float score;
     private int review;
+
+    public  RestaurantInfo(){
+
+    }
     @Builder
     public RestaurantInfo(String name, String description, String tel, String address, float lat, float lon, String location, List<Menu> menu, String category, float score, int review) {
         this.name = name;
