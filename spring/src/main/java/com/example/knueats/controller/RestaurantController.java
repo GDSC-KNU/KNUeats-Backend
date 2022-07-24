@@ -1,14 +1,13 @@
 package com.example.knueats.controller;
 
+import com.example.knueats.entity.*;
 import com.example.knueats.entity.Menu;
-import com.example.knueats.entity.MenuRepository;
-import com.example.knueats.entity.Restaurant;
-import com.example.knueats.entity.RestaurantRepository;
 import com.example.knueats.service.GeoService;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
@@ -24,21 +23,55 @@ public class RestaurantController {
     @Autowired
     MenuRepository menuRepository;
     @Autowired
+    MenuSearchRepository menuSearchRepository;
+    @Autowired
+    RestaurantSearchRepository restaurantSearchRepository;
+    @Autowired
     GeoService geoService;
     @PostMapping("/")
-    public Restaurant create(@RequestBody Restaurant restaurant) throws ParseException {
-        String addr = restaurant.getAddress();
+    public Restaurant create(@RequestBody RestaurantInfo restaurantInfo) throws ParseException {
+        String addr = restaurantInfo.getAddress();
         String json = geoService.getKakaoApiFromAddress(addr);
         ArrayList<Float> pos = geoService.changeToJSON(json);
-        restaurant.setLon(pos.get(0));
-        restaurant.setLat(pos.get(1));
-        return restaurantRepository.save(restaurant);
-    }
-    @GetMapping("/{id}")
-    public Restaurant detail(@PathVariable Long id){
-        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        restaurantInfo.setLon(pos.get(0));
+        restaurantInfo.setLat(pos.get(1));
+        Restaurant restaurant = new Restaurant(
+                restaurantInfo.getName(),
+                restaurantInfo.getDescription(),
+                restaurantInfo.getTel(),
+                restaurantInfo.getLat(),
+                restaurantInfo.getLon(),
+                restaurantInfo.getAddress(),
+                restaurantInfo.getCategory(),
+                restaurantInfo.getLocation(),
+                restaurantInfo.getScore(),
+                restaurantInfo.getReview());
+        restaurantRepository.save(restaurant);
+        for (Menu menu : restaurantInfo.getMenu()){
+            Menu menuInput = new Menu(restaurant.getId(),menu.getName(),menu.getPrice());
+            menuRepository.save(menuInput);
+        }
         return restaurant;
     }
+    @GetMapping("/{id}")
+    public RestaurantInfo detail(@PathVariable Long id){
+        Restaurant restaurantInfo = restaurantRepository.findById(id).orElse(null);
+        List<Menu> menu = menuRepository.findMenu(id);
+        RestaurantInfo restaurant = new RestaurantInfo(
+                restaurantInfo.getName(),
+                restaurantInfo.getDescription(),
+                restaurantInfo.getTel(),
+                restaurantInfo.getAddress(),
+                restaurantInfo.getLat(),
+                restaurantInfo.getLon(),
+                restaurantInfo.getLocation(),
+                menu,
+                restaurantInfo.getCategory(),
+                restaurantInfo.getScore(),
+                restaurantInfo.getReview());
+        return restaurant;
+    }
+
     @GetMapping("/category/{category}")
     public List<Restaurant> list(@PathVariable String category){
         List<Restaurant> restaurantList = restaurantRepository.findAll();
@@ -52,20 +85,16 @@ public class RestaurantController {
     }
     @GetMapping("/search/")
     public List<Restaurant> search(@RequestParam(value="word") String word){
-        List<Restaurant> restaurantList = restaurantRepository.findAll();
-        List<com.example.knueats.entity.Menu> menuList = menuRepository.findAll();
+        String inputs = "%"+word+"%";
+        List<Restaurant> restaurantList = restaurantSearchRepository.findContainedRestaurant(inputs);
+        List<Long> menuList = menuSearchRepository.findContainedMenu(inputs);
         List<Restaurant> returnList = new ArrayList<>();
-        for(Restaurant restaurant : restaurantList){
-            if(word.equals(restaurant.getName())) //검색 이름, 메뉴겹치면 반환
-                returnList.add(restaurant);
+        for(Restaurant restaurant : restaurantList) {
+            returnList.add(restaurant);
         }
-        System.out.println(returnList);
-        for(Menu menu: menuList){
-            if(word.equals(menu.getName())) {
-                //해당 메뉴를 가진 레스토랑이 있다면 반환
-                Restaurant restaurant = restaurantRepository.findById(menu.getRestaurantId()).orElse(null);
-                returnList.add(restaurant);
-            }
+        for(Long menu: menuList){
+            Restaurant restaurant = restaurantRepository.findByRestaurantId(menu);
+            returnList.add(restaurant);
         }
         return returnList;
     }

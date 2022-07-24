@@ -2,19 +2,10 @@ package com.example.knueats.entity;
 
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
 import java.util.List;
-
 @Getter
 @Setter
-@Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@EntityListeners(AuditingEntityListener.class)
-public class Restaurant {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class RestaurantInfo {
     private String name;
     private String description;
     private String tel;
@@ -22,22 +13,24 @@ public class Restaurant {
     private float lat;
     private float lon; //위도경도
     private String location;
+    private List<Menu> menu; //나중에 Menu menu로 변경
     private String category;
-    private String menu;
     private float score;
     private int review;
-    ; // tag enum
     @Builder
-    public Restaurant(String name,String description, String tel,float lat,float lon, String address, String category, String location,float score,int review) {
+    public RestaurantInfo(String name, String description, String tel, String address, float lat, float lon, String location, List<Menu> menu, String category, float score, int review) {
         this.name = name;
         this.description = description;
         this.tel = tel;
         this.address = address;
         this.category = category;
         this.location = location;
+        this.menu = menu;
         this.lat = lat;
         this.lon = lon;
         this.score = score;
         this.review = review;
+
     }
 }
+
