@@ -74,39 +74,24 @@ public class RestaurantController {
 
     @GetMapping("/category/{category}")
     public List<Restaurant> list(@PathVariable String category){
-        List<Restaurant> restaurantList = restaurantRepository.findAll();
-        List<Restaurant> returnList = new ArrayList<>();
-        for(Restaurant restaurant : restaurantList){
-            if(category.equals(restaurant.getCategory())){
-                returnList.add(restaurant);
-            }
-        }
-        return returnList;
+        List<Restaurant> restaurantList = restaurantSearchRepository.findCategoricalRestaurant(category);
+        return restaurantList;
     }
     @GetMapping("/search/")
     public List<Restaurant> search(@RequestParam(value="word") String word){
         String inputs = "%"+word+"%";
         List<Restaurant> restaurantList = restaurantSearchRepository.findContainedRestaurant(inputs);
         List<Long> menuList = menuSearchRepository.findContainedMenu(inputs);
-        List<Restaurant> returnList = new ArrayList<>();
-        for(Restaurant restaurant : restaurantList) {
-            returnList.add(restaurant);
-        }
         for(Long menu: menuList){
             Restaurant restaurant = restaurantRepository.findByRestaurantId(menu);
-            returnList.add(restaurant);
+            restaurantList.add(restaurant);
         }
-        return returnList;
+        return restaurantList;
     }
     @GetMapping("/location/{location}")
     public List<Restaurant> locationList(@PathVariable String location){
-        List<Restaurant> restaurantList = restaurantRepository.findAll();
-        List<Restaurant> returnList = new ArrayList<>();
-        for(Restaurant restaurant : restaurantList){
-            if(location.equals(restaurant.getLocation())){
-                returnList.add(restaurant);
-            }
-        }
-        return returnList;
+        String position = "%"+location+"%";
+        List<Restaurant> restaurantList = restaurantSearchRepository.findLocationalRestaurant(position);
+        return restaurantList;
     }
 }
