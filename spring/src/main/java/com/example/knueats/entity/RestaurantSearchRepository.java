@@ -11,12 +11,12 @@ public interface RestaurantSearchRepository extends JpaRepository<Restaurant,Str
         List<Long> findContainedRestaurantId(@Param("word") String word);
     @Query(value = "select * from restaurant where name like :word order by review DESC",nativeQuery = true)
         List<Restaurant> findContainedRestaurant(@Param("word") String word);
-    @Query(value = "select * from restaurant where location like :location by review DESC", nativeQuery = true)
+    @Query(value = "select * from restaurant where location like :location order by review DESC", nativeQuery = true)
         List<Restaurant> findLocationalRestaurantByReview(@Param("location") String location);
-    @Query(value = "select * from restaurant where location like :location by (score/review) DESC", nativeQuery = true)
+    @Query(value = "select * from restaurant where location like :location order by (score/review) DESC", nativeQuery = true)
     List<Restaurant> findLocationalRestaurantByScore(@Param("location") String location);
-    @Query(value = "select * from restaurant where category = :category by review DESC", nativeQuery = true)
+    @Query(value = "select * from restaurant where category = :category order by review DESC", nativeQuery = true)
         List<Restaurant> findCategoricalRestaurantByReview(@Param("category") String category);
-    @Query(value = "select * from restaurant where category = :category by (score/review) DESC", nativeQuery = true)
+    @Query(value = "select * from restaurant where category = :category order by (score/review) DESC", nativeQuery = true)
         List<Restaurant> findCategoricalRestaurantByScore(@Param("category") String category);
 }
