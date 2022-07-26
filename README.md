@@ -1,9 +1,21 @@
 # KNUeats
-### back-end API Docs
-[notion] https://www.notion.so/API-Docs-3ffb1f32f7c641a58a42fdc3187c680d
+#### 경북대 주변에 있는 맛집을 알려주는 어플 서비스 입니다.
+## Member 
+| [<img src="https://avatars.githubusercontent.com/u/63745627?v=4" width="100px">](https://github.com/kasterra) | [<img src="https://github.com/JangYunSeong.png" width="100px">](https://github.com/JangYunSeong) |
+| :--------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
+|                          [오영선](https://github.com/oyoungsun)                           |                            [장윤성](https://github.com/JangYunSeong)                             |
+## Stack
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
+<img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+
+
+## API Docs
 
 ### Schema
-```json
+```
 restaurant(1)
 {
 	id : INT(primary key,not null,auto increment)
@@ -28,19 +40,11 @@ menu(N)
 	price : VARCHAR(not null) // ex) "12,000원"
 }
 ```
-### /eats
-##POST
-- 가게 등록
-
-  https://knueat.herokuapp.com/
-
-  **Responses**
-
-  Code: 200 Successful Response
-
+## POST
+### 가게 등록
   **Request Parameters**
 
-    ```json
+    ```
     { // restaurant
     	name : String,
     	description : String,  //null 가능
@@ -53,23 +57,38 @@ menu(N)
     사용 예
     request type : 
     {
-      "name": "찜닭집",
+     	"name": "찜닭집",
     	"description": "설명",
-      "tel": "053-666-6666",
+      	"tel": "053-666-6666",
     	"address" : "대구 북구 산격로 80",
-      "menu": [
-    			{
-    				"name":"찜닭",
-    				"price":"15,000원"	
-    			}
-    	],
-      "category" : "한식",
-      "location" : "북문" // 북문/동문/쪽문&서문
+      	"menu": [
+    		    {
+    			"name":"찜닭",
+    			"price":"15,000원"	
+    		    }
+    		],
+      	"category" : "한식",
+      	"location" : "북문" // 북문/동문/쪽문&서문
     }
     ```
+    **Responses**
 
-##GET
-- 음식 카테고리별 조회
+    Code: 200 Successful Response
+    
+### 가게 리뷰 등록
+
+  https://knueat.herokuapp.com/{id}/score
+  **Request Parameters**
+  ```
+  {
+  	"score" : float(0~5)
+  }
+  ```
+  **response**
+  Code: 200 Successful Response
+
+## GET
+### 음식 카테고리별 조회
 
   https://knueat.herokuapp.com/category/{category}
 
@@ -79,11 +98,11 @@ menu(N)
 
   ### return type :
 
-    ```json
+    ```
     ex) https://knueat.herokuapp.com/category/중식
     [
         {
-            "id": 40,
+            "id": -,
             "name": "케이푸드스토리",
             "description": "\n",
             "tel": "053-944-7853",
@@ -97,7 +116,7 @@ menu(N)
             "review": 0
         },
         {
-            "id": 49,
+            "id": -,
             "name": "만리향",
             "description": "\n",
             "tel": "053-954-3453",
@@ -113,14 +132,14 @@ menu(N)
     ]
     ```
 
-- 가게 ID로 조회
+### 가게 ID로 조회
 
   https://knueat.herokuapp.com/{id}
 
   ### return type :
 
-    ```sql
-    예) : [https://knueat.herokuapp.com](https://knueat.herokuapp.com/)/1
+    ```
+    예) : [https://knueat.herokuapp.com](https://knueat.herokuapp.com/)/{id}
     {
         "name": "배스킨라빈스대구경대북문점",
         "description": "영업시간/매일 10:00 - 23:00\n",
@@ -131,26 +150,26 @@ menu(N)
         "location": "북문",
         "menu": [
             {
-                "id": 1,
-                "restaurantId": 1,
+                "id": -,
+                "restaurantId": -,
                 "name": "파인트",Strn
                 "price": "8,900원"
             },
             {
-                "id": 2,
-                "restaurantId": 1,
+                "id": -,
+                "restaurantId": -,
                 "name": "쿼터",
                 "price": "17,000원"
             },
             {
-                "id": 3,
-                "restaurantId": 1,
+                "id": -,
+                "restaurantId": -,
                 "name": "패밀리",
                 "price": "24,000원"
             },
             {
-                "id": 4,
-                "restaurantId": 1,
+                "id": -,
+                "restaurantId": -,
                 "name": "하프갤론",
                 "price": "29,000원"
             }
@@ -161,7 +180,7 @@ menu(N)
     }
     ```
 
-- 메뉴, 가게 이름 검색으로 조회(like)
+### 메뉴, 가게 이름 검색으로 조회(like)
 
   https://knueat.herokuapp.com/search?word=value
 
@@ -169,11 +188,11 @@ menu(N)
 
   ### return type :
 
-    ```sql
-    ex} https://knueat.herokuapp.com/search/?word=떡볶이
+    ```
+    ex} https://knueat.herokuapp.com/search?word=떡볶이
     [
             {
-            "id": 19,
+            "id": -,
             "name": "북문골목떡볶이",
             "description": "평일 10:30 - 24:00\n",
             "tel": "053-941-7707",
@@ -182,12 +201,11 @@ menu(N)
             "lon": 128.60977,
             "location": "북문",
             "category": "분식",
-            "menu": "치즈떡볶이\n사진\n대표\n5,000원\n순대\n3,500원\n떢볶이\n3,000원\n쌀떡볶이\n3,000원",
             "score": 345.6,
             "review": 80
         },
         {
-            "id": 27,
+            "id": -,
             "name": "착한떡볶이",
             "description": "\n",
             "tel": "",
@@ -196,12 +214,11 @@ menu(N)
             "lon": 128.61224,
             "location": "쪽문&서문",
             "category": "분식",
-            "menu": null,
             "score": 0.0,
             "review": 4
         },
         {
-            "id": 30,
+            "id": -,
             "name": "선택떡볶이",
             "description": "\n",
             "tel": "053-214-2018",
@@ -210,14 +227,13 @@ menu(N)
             "lon": 128.61732,
             "location": "동문",
             "category": "분식",
-            "menu": "반반떡볶이(11가지 맛 중 2가지 맛 선택)(1~2인분)\n6,900원\n1인분떡볶이(1인분)\n4,000원\n치즈로제떡볶이(한통가득3~4인분(2L용기))\n16,000원\n반반떡볶이(11가지 맛 중 2가지 맛 선택)(1~2인분)\n6,900원",
             "score": 0.0,
             "review": 17
         }
     ]
     ```
 
-- 학교 문 별 조회
+### 학교 문 별 조회
 
   https://knueat.herokuapp.com/location/{location}
 
@@ -226,39 +242,36 @@ menu(N)
     - 북문/동문/쪽문/서문
 
   ### return type :
-```json
-ex) https://knueat.herokuapp.com/eats/location/북문
+	```
+	ex) https://knueat.herokuapp.com/eats/location/북문
 
-[
-    {
-        "id": 1,
-        "name": "배스킨라빈스대구경대북문점",
-        "description": "영업시간/매일 10:00 - 23:00\n",
-        "tel": "053-944-4406",
-        "address": "대구광역시 북구 대학로 83 ",
-        "lat": 35.892834,
-        "lon": 128.60918,
-        "location": "북문",
-        "menu": "파인트\n8,900원\n주문수 2\n쿼터\n17,000원\n패밀리\n24,000원\n하프갤론\n29,000원",
-        "category": "카페/디저트",
-        "score": 4144.9,
-        "review": 905
-    },
-    {
-        "id": 3,
-        "name": "마사",
-        "description": "가게에 대한 상세정보가 없습니다.",
-        "tel": "053-247-6678",
-        "address": "대구 북구 산격로 6길 18",
-        "lat": 35.892433,
-        "lon": 128.60718,
-        "location": "북문",
-        "menu": "새우초밥\n12,000원\n마사모듬\n12,000원\n연어초밥\n14,000원\n연어+광어초밥\n14,000원",
-        "category": "일식",
-        "score": 3582.08,
-        "review": 772
-    },
-...
-]
-]
-```
+	[
+	    {
+		"id": -,
+		"name": "배스킨라빈스대구경대북문점",
+		"description": "영업시간/매일 10:00 - 23:00\n",
+		"tel": "053-944-4406",
+		"address": "대구광역시 북구 대학로 83 ",
+		"lat": 35.892834,
+		"lon": 128.60918,
+		"location": "북문",
+		"category": "카페/디저트",
+		"score": 4144.9,
+		"review": 905
+	    },
+	    {
+		"id": -,
+		"name": "마사",
+		"description": "가게에 대한 상세정보가 없습니다.",
+		"tel": "053-247-6678",
+		"address": "대구 북구 산격로 6길 18",
+		"lat": 35.892433,
+		"lon": 128.60718,
+		"location": "북문",
+		"category": "일식",
+		"score": 3582.08,
+		"review": 772
+	    },
+	...
+	]
+	```
