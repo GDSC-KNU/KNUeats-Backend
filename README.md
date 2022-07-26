@@ -78,6 +78,7 @@ menu(N)
 ### 가게 리뷰 등록
 
   https://knueat.herokuapp.com/{id}/score
+  
   **Request Parameters**
   ```
   {
