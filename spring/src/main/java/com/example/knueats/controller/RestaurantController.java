@@ -53,6 +53,16 @@ public class RestaurantController {
         }
         return restaurant;
     }
+    @PostMapping("/{id}/score")
+    public Restaurant postReview(@RequestBody Review review, @PathVariable Long id){
+        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        int currentReview = restaurant.getReview() + 1;
+        Float currentScore = restaurant.getScore()+review.getScore();
+        restaurant.setReview(currentReview);
+        restaurant.setScore(currentScore);
+        // restaurantRepository.updateReview(currentScore,currentReview,id)
+        return restaurantRepository.save(restaurant);
+    }
     @GetMapping("/{id}")
     public RestaurantInfo detail(@PathVariable Long id){
         Restaurant restaurantInfo = restaurantRepository.findById(id).orElse(null);
@@ -74,24 +84,29 @@ public class RestaurantController {
 
     @GetMapping("/category/{category}")
     public List<Restaurant> list(@PathVariable String category){
-        List<Restaurant> restaurantList = restaurantSearchRepository.findCategoricalRestaurant(category);
+        List<Restaurant> restaurantList = restaurantSearchRepository.findCategoricalRestaurantByReview(category);
         return restaurantList;
     }
-    @GetMapping("/search/")
+    @GetMapping("/search")
     public List<Restaurant> search(@RequestParam(value="word") String word){
         String inputs = "%"+word+"%";
         List<Restaurant> restaurantList = restaurantSearchRepository.findContainedRestaurant(inputs);
+        List<Long> check = restaurantSearchRepository.findContainedRestaurantId(inputs);
+        System.out.println(check);
         List<Long> menuList = menuSearchRepository.findContainedMenu(inputs);
         for(Long menu: menuList){
             Restaurant restaurant = restaurantRepository.findByRestaurantId(menu);
-            restaurantList.add(restaurant);
+            boolean exist = check.contains(restaurant.getId());
+            if (exist == false){
+                restaurantList.add(restaurant);
+            }
         }
         return restaurantList;
     }
     @GetMapping("/location/{location}")
     public List<Restaurant> locationList(@PathVariable String location){
         String position = "%"+location+"%";
-        List<Restaurant> restaurantList = restaurantSearchRepository.findLocationalRestaurant(position);
+        List<Restaurant> restaurantList = restaurantSearchRepository.findLocationalRestaurantByReview(position);
         return restaurantList;
     }
 }
