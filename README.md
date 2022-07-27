@@ -277,3 +277,5 @@ menu(N)
 	...
 	]
 	```
+## Deployment
+[배포 과정](https://github.com/GDSC-KNU/KNUeats-Backend.wiki.git)
