@@ -14,5 +14,8 @@
 ## Api Docs
 - [Api 명세](https://github.com/GDSC-KNU/KNUeats-Backend/wiki/Api-Docs)
 
+## Data
+- [Database](https://github.com/GDSC-KNU/KNUeats-Backend/tree/master/python#readme)
+
 ## Deployment
 - [배포 과정](https://github.com/GDSC-KNU/KNUeats-Backend/wiki/deployment)
