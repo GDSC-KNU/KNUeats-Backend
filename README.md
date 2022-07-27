@@ -23,7 +23,7 @@
 
 ### 배포
 <img src="https://img.shields.io/badge/heroku-430098?style=for-the-badge&logo=Heroku&logoColor=white">
-<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+<img src="https://img.shields.io/badge/amazon RDS-527FFF?style=for-the-badge&logo=Amazon RDS&logoColor=white">
 
 ## Project 설명
 
