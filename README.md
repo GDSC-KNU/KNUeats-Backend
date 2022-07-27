@@ -1,10 +1,16 @@
 # KNUeats
 #### 경북대 주변에 있는 맛집을 알려주는 어플 서비스 입니다.
-## Member 
-| [<img src="https://avatars.githubusercontent.com/u/63745627?v=4" width="100px">](https://github.com/kasterra) | [<img src="https://github.com/JangYunSeong.png" width="100px">](https://github.com/JangYunSeong) |
+## Member
+### Frontend
+| [<img src="https://github.com/gidskql6671.png" width="100px">](https://github.com/gidskql6671) | [<img src="https://github.com/huihuiwon.png" width="100px">](https://github.com/huihuiwon) | [<img src="https://github.com/choimyungbin.png" width="100px">](https://github.com/choimyungbin) |
+| :--------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------: 
+|                          [김동환](https://github.com/gidskql6671)                           |                            [조희원](https://github.com/huihuiwon)                             |                        [최명빈](https://github.com/choimyungbin)                           |
+### Backend
+| [<img src="https://avatars.githubusercontent.com/u/63745627?v=4" width="100px">](https://github.com/oyoungsun) | [<img src="https://github.com/JangYunSeong.png" width="100px">](https://github.com/JangYunSeong) |
 | :--------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------: |
 |                          [오영선](https://github.com/oyoungsun)                           |                            [장윤성](https://github.com/JangYunSeong)                             |
 ## Stack
+### Frontend
 ### Backend - Server
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
 <img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
@@ -18,6 +24,8 @@
 ### 배포
 <img src="https://img.shields.io/badge/heroku-430098?style=for-the-badge&logo=Heroku&logoColor=white">
 <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+
+## Project 설명
 
 ## Api Docs
 - [Api 명세](https://github.com/GDSC-KNU/KNUeats-Backend/wiki/Api-Docs)
