@@ -29,6 +29,35 @@
 <img src="https://img.shields.io/badge/heroku-430098?style=for-the-badge&logo=Heroku&logoColor=white"> <img src="https://img.shields.io/badge/amazon RDS-527FFF?style=for-the-badge&logo=Amazon RDS&logoColor=white">
 
 ## Project 설명
+[네이버 Maps Open API](https://guide.ncloud-docs.com/docs/naveropenapiv3-maps-overview)를 사용한 프로젝트입니다.  
+
+### 기능 설명
+- 학교 주변의 가게들을 지도를 통해 조회할 수 있다.
+- 누락된 가게가 있다면 추가할 수 있다.
+- 가게의 상세 정보를 확인할 수 있다.
+- 가게의 별점을 조회하고, 등록할 수 있다.
+- 키워드로 가게를 검색할 수 있다.
+
+## 데모 사진
+### 메인 화면
+**한식 카테고리의 가게들**  
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/map_korean.png" width="50%">
+
+**분식 카테고리의 가게들**  
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/map_snak.png" width="50%">
+
+### 가게 등록 화면
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/regist_restaurant.png" width="50%">
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/regist_restaurant2.png" width="50%">
+
+### 가게 상세 조회 화면
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/restaurant_detail.png
+" width="50%">
+
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/regist_score.png" width="50%">
+
+### 가게 검색 화면
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/search_restaurant.png" width="50%">
 
 ## Api Docs
 - [Api Description](https://github.com/GDSC-KNU/KNUeats-Backend/wiki/Api-Docs)
