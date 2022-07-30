@@ -51,8 +51,7 @@
 <img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/regist_restaurant2.png" width="50%">
 
 ### 가게 상세 조회 화면
-<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/restaurant_detail.png
-" width="50%">
+<img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/restaurant_detail.png" width="50%">
 
 <img src="https://github.com/GDSC-KNU/KNUeats-Front/blob/main/docs/images/regist_score.png" width="50%">
 
